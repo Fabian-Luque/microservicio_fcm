@@ -10,6 +10,7 @@
   "author": "Fabian Luque",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.16.3",
     "express-fileupload": "^1.0.0-alpha.1",
     "firebase-admin": "^6.1.0",

@@ -1,13 +1,13 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var admin = require('firebase-admin');
-
+var cors = require('cors');
 
 var serviceAccount = require('./gofeels-pms-firebase-adminsdk-4jspc-5e91c11ac9.json');
 
 // Inicializar variables 
 var app = express();
-
+app.use(cors());
 
 const adminApp = admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
