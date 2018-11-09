@@ -7,7 +7,6 @@ var serviceAccount = require('./gofeels-pms-firebase-adminsdk-4jspc-5e91c11ac9.j
 
 // Inicializar variables 
 var app = express();
-app.use(cors());
 
 const adminApp = admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
@@ -18,6 +17,11 @@ firestore.settings({ timestampsInSnapshots: true });
 
 app.use(bodyParser.urlencoded( {extended: false}))
 app.use(bodyParser.json())
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 // Importar rutas
 var appRoutes = require('./routes/app');
