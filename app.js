@@ -26,6 +26,6 @@ var appRoutes = require('./routes/app');
 app.use('/notificacion', appRoutes);
 
 // Escuchar peticiones
-app.listen(3000, () => {
-    console.log('Express server corriendo en el puerto 3000: \x1b[32m%s\x1b[0m', ' online');
+app.listen(3003, () => {
+    console.log('Express server corriendo en el puerto 3003: \x1b[32m%s\x1b[0m', ' online');
 });
