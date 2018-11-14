@@ -94,6 +94,49 @@ app.get('/notificaciones/:propiedad_id', (req, res) => {
             console.log('Error getting documents', err);
         });
 
+});
+
+app.delete('/:id', (req, res)=>{
+    
+    var id = req.params.id;
+    id = parseInt(id);
+    
+    var notificacion_ref = db.collection('notifications');
+
+    var queryRef = notificacion_ref.where('reserva_id', '==', id);
+   
+
+    queryRef.get().then(function(querySnapshot){
+        
+        if (!querySnapshot.docs.length) {
+            res.status(200).json({
+                ok: false,
+                message: `Error, no se ha encontrado documento con el id : ${id}`
+            });
+        }
+
+        querySnapshot.forEach(function(doc){
+            console.log('entra 2');
+            
+            doc.ref.delete().then(() => {
+                res.status(200).json({
+                    ok: true,
+                    message: "Documento borrado con exito"
+                });
+            }).catch(function(error) {
+                res.status(200).json({
+                    ok: false,
+                    message: `Error: ${error}`
+                });
+            });
+        });
+    })
+    .catch(function(error) {
+        res.status(200).json({
+            ok: false,
+            message: `Error: ${error}`
+        });
+    });
     
 
 });
